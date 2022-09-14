@@ -1,0 +1,1 @@
+deck <- c(read.csv("deck"))$x
