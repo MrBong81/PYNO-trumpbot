@@ -67,7 +67,7 @@ MATCH_SIM <- function(blindp1,
   initiative <-  1 # or -1 i guess
   # ROUND 1 // X
   while (round <= 20) {
-    # cat("\n########### ROUND ", round, "##################\n","@@TRUMP CARD@@ :",trump.card %>% decoder)
+    cat("\n########### ROUND ", round, "##################\n","@@TRUMP CARD@@ :",trump.card %>% decoder)
     if (initiative == 1) {
       hand1 <- p1.hand
       blind <- blindp1
@@ -107,7 +107,7 @@ MATCH_SIM <- function(blindp1,
     hist.idx <- hist.idx + 1
     #### DEBUG PURPOSE
     
-    # cat("\nROUND PLAYED: ", decoder(c(card1, card2)),"\n\n")
+    cat("\nROUND PLAYED: ", decoder(c(card1, card2)),"\n\n")
     #### DROP CARDS OF THE HANDS
     if (initiative == 1) {
       p1.hand[choice1] <- as.raw(0x00)
@@ -137,7 +137,7 @@ MATCH_SIM <- function(blindp1,
     }
     round <- round + 1
   }
-  # cat("HISTORY", histo,"\n")
+  cat("HISTORY", histo,"\n")
   return(list(histo, trump.card))
 }
 ################################
@@ -145,5 +145,5 @@ MATCH_SIM <- function(blindp1,
 # h <- MATCH_SIM(p1.blindpick, p1.counter,p1.blindpick, p1.counter,deck %>% encoder)
 
 ###########Play a match VS a RANDOM GUESSING AI
-# h <- MATCH_SIM(pg.blind, pg.counter, random.blind, random.counter, deck %>% encoder)
-# cat("p1 score is :")
+h <- MATCH_SIM(pg.blind, pg.counter, random.blind, random.counter, deck %>% encoder)
+cat("p1 score is :")
