@@ -19,11 +19,11 @@ random.counter <- function(card, hand, trump){
 pg.blind <- function(hand, trump){
   len <- length(hand)
   h <- decoder(hand)
-  cat("Your hand : ",h, " \n card : ", decoder(trump), "\n")
+  cat("\nYour hand : ",h, "\n")
   choice <- readline("Type the digit corresponding to the card:\n") %>% as.integer
   while(choice < 1 | choice > len){
     cat("!!!INVALID CHOICE!!!\n")
-    cat("Your hand : ",h, " \n card : ", decoder(trump), "\n")
+    cat("Your hand : ",h, " \n")
     choice <- readline("Type the digit corresponding to the card:\n") %>% as.integer
   }
   return(choice)
@@ -32,15 +32,16 @@ pg.blind <- function(hand, trump){
 pg.counter <- function(card ,hand, trump){
   len <- length(hand)
   h <- decoder(hand)
-  cat("Card played : ", decoder(card),"\nYour hand : ",h, " \n card : ", decoder(trump), "\n")
+  cat("\nCard played : ", decoder(card),"\nYour hand : ",h, " \n")
   choice <- readline("Type the digit corresponding to the card:\n") %>% as.integer
   while(choice < 1 | choice > len){
     cat("!!!INVALID CHOICE!!!\n")
-    cat("Card played : ", encoder(card),"Your hand : ",h, " \n card : ", decoder(trump), "\n")
+    cat("Card played : ", decoder(card),"\nYour hand : ",h, " \n")
     choice <- readline("Type the digit corresponding to the card:\n") %>% as.integer
   }
   return(choice)
 }
+
 
 ########## MATCH ############
 MATCH_SIM <- function(blindp1,
@@ -66,7 +67,7 @@ MATCH_SIM <- function(blindp1,
   initiative <-  1 # or -1 i guess
   # ROUND 1 // X
   while (round <= 20) {
-    cat("###########ROUND ", round, "##################\n")
+    cat("\n########### ROUND ", round, "##################\n","@@TRUMP CARD@@ :",trump.card %>% decoder)
     if (initiative == 1) {
       hand1 <- p1.hand
       blind <- blindp1
@@ -106,7 +107,7 @@ MATCH_SIM <- function(blindp1,
     hist.idx <- hist.idx + 1
     #### DEBUG PURPOSE
     
-    cat("ROUND PLAYED: ", decoder(c(card1, card2)),"\n\n")
+    cat("\nROUND PLAYED: ", decoder(c(card1, card2)),"\n\n")
     #### DROP CARDS OF THE HANDS
     if (initiative == 1) {
       p1.hand[choice1] <- as.raw(0x00)
@@ -146,4 +147,3 @@ MATCH_SIM <- function(blindp1,
 ###########Play a match VS a RANDOM GUESSING AI
 h <- MATCH_SIM(pg.blind, pg.counter, random.blind, random.counter, deck %>% encoder)
 cat("p1 score is :")
-match_eval(h[[1]], h[[2]]) %>% print

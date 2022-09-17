@@ -1,1 +1,1 @@
-deck <- c(read.csv("deck"))$x
+deck <- c(read.csv("deck.txt"))$x
