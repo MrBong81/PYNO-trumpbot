@@ -1,0 +1,3 @@
+MCT alogrithm
+Set up a Training for GAN
+How to Implement NN
